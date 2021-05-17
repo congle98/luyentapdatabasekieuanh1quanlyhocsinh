@@ -69,25 +69,25 @@ insert into point(course_id, student_id,point) values (2,5,8);
 insert into point(course_id, student_id,point) values (5,6,7);
 insert into point(course_id, student_id,point) values (4,7,5);
 insert into point(course_id, student_id,point) values (4,8,6);
-insert into point(course_id, student_id,point) values (5,11,8);
+insert into point(course_id, student_id,point) values (5,9,8);
 insert into point(course_id, student_id,point) values (2,10,9);
 insert into point(course_id, student_id,point) values (3,10,7);
-insert into point(course_id, student_id,point) values (2,12,5);
-insert into point(course_id, student_id,point) values (3,12,8);
-insert into point(course_id, student_id,point) values (5,4,5);
+insert into point(course_id, student_id,point) values (2,2,5);
+insert into point(course_id, student_id,point) values (3,2,8);
+insert into point(course_id, student_id,point) values (5,3,5);
 
 
 -- lấy ra tổng số học sinh của từng lớp--
 select class.name, count(students.id) as count
 from class
-    inner join students on class.id = students.class_id
+         inner join students on class.id = students.class_id
 GROUP BY class.name
 order by class.name;
 
 -- đếm số lượng học sinh của các tỉnh
 select address.address, count(students.id) as count
 from address
-    inner join students on address.id = students.address_id
+         inner join students on address.id = students.address_id
 GROUP BY address.address
 order by address.address;
 
@@ -99,9 +99,9 @@ GROUP BY course.name
 order by course.name;
 
 -- khoá học có điểm trung bình cao nhất
-select course.name, avg(point.point) as avg
+select course.name, avg(point.point)
 from course
          inner join point on course.id = point.course_id
 GROUP BY course.name
-order by avg DESC
-    limit 1;
+order by point.point DESC
+limit 1;
